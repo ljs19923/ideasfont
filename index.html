@@ -407,13 +407,17 @@
       .toolbar button {
         appearance: none;
         border: 1px solid var(--c-border);
-        background: var(--c-surface);
+        /* Fond plus marqué que la surface : teinte accent à 8 %
+           pour rester visible en light comme en dark sans jamais
+           inverser le contraste. */
+        background: color-mix(in srgb, var(--c-accent) 8%, var(--c-surface));
         color: var(--c-text);
-        padding: 0.45rem 0.9rem;
+        padding: 0.55rem 1.05rem;
         border-radius: 999px;
         font-family: inherit;
         font-size: inherit;
-        font-weight: 500;
+        font-weight: 600;
+        letter-spacing: 0.01em;
         cursor: pointer;
         transition:
           background 0.15s ease,
@@ -422,14 +426,10 @@
       }
       .toolbar button:hover {
         border-color: var(--c-accent);
+        background: color-mix(in srgb, var(--c-accent) 14%, var(--c-surface));
       }
       .toolbar button:active {
         transform: scale(0.97);
-      }
-      .toolbar button[aria-pressed="true"] {
-        background: var(--c-heading);
-        color: var(--c-surface);
-        border-color: var(--c-heading);
       }
 
       /* Hero */
@@ -734,7 +734,7 @@
             aria-pressed="false"
             title="Basculer light / dark"
           >
-            Mode sombre
+            Dark
           </button>
         </div>
       </div>
@@ -1109,7 +1109,7 @@ article h1 {
 
         function apply(theme) {
           root.setAttribute("data-theme", theme);
-          btn.textContent = theme === "dark" ? "Mode clair" : "Mode sombre";
+          btn.textContent = theme === "dark" ? "Light" : "Dark";
           btn.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
         }
 
