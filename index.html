@@ -407,10 +407,9 @@
       .toolbar button {
         appearance: none;
         border: 1px solid var(--c-border);
-        /* Fond plus marqué que la surface : teinte accent à 8 %
-           pour rester visible en light comme en dark sans jamais
-           inverser le contraste. */
-        background: color-mix(in srgb, var(--c-accent) 8%, var(--c-surface));
+        /* Fond neutre, juste un cran différent du fond du header :
+           c-code-bg est défini pour être "presque-fond" en light comme en dark. */
+        background: var(--c-code-bg);
         color: var(--c-text);
         padding: 0.55rem 1.05rem;
         border-radius: 999px;
@@ -426,7 +425,6 @@
       }
       .toolbar button:hover {
         border-color: var(--c-accent);
-        background: color-mix(in srgb, var(--c-accent) 14%, var(--c-surface));
       }
       .toolbar button:active {
         transform: scale(0.97);
