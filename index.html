@@ -42,7 +42,7 @@
      ============================================================ */
   :root {
     /* --- Typography fluid scale (mobile → desktop via clamp) --- */
-    --fs-body:    clamp(1rem,      0.875rem + 0.4vw, 1.1875rem); /* 16 → 19 */
+    --fs-body:    clamp(1.0625rem, 0.95rem + 0.36vw, 1.1875rem); /* 17 → 19 */
     --fs-lead:    clamp(1.1875rem, 1rem + 0.9vw,     1.5rem);    /* 19 → 24 */
     --fs-small:   clamp(0.875rem,  0.83rem + 0.2vw,  0.9375rem); /* 14 → 15 */
     --fs-meta:    clamp(0.8125rem, 0.78rem + 0.15vw, 0.875rem);  /* 13 → 14 */
@@ -678,7 +678,7 @@
     </div>
     <div class="compare__card">
       <span class="badge badge--good">Après</span>
-      <h4>16 px / 1.6 / 60ch</h4>
+      <h4>17 px / 1.6 / 60ch</h4>
       <p class="compare__good">
         Une plateforme d'intelligence en temps réel sur les 50 minerais critiques&nbsp;: lithium, cobalt, cuivre, nickel, terres rares, uranium, graphite, gallium. Carte monde immersive, feed d'alertes géopolitiques, catalyseurs juniors miniers, squeeze detector et alertes custom. Le Bloomberg accessible des matières premières stratégiques pour les retail traders avancés et les family offices, à 999&nbsp;$ par an au lieu de 24&nbsp;000&nbsp;$.
       </p>
@@ -696,7 +696,7 @@
   </p>
 
 <pre><code>:root {
-  --fs-body: clamp(1rem, 0.875rem + 0.4vw, 1.1875rem); /* 16 → 19 */
+  --fs-body: clamp(1.0625rem, 0.95rem + 0.36vw, 1.1875rem); /* 17 → 19 */
   --fs-h1:   clamp(2rem,      1.4rem + 3vw,    3.5rem);  /* 32 → 56 */
   --fs-h2:   clamp(1.625rem,  1.3rem + 1.6vw,  2.25rem); /* 26 → 36 */
   --fs-h3:   clamp(1.25rem,   1.1rem + 0.75vw, 1.625rem);/* 20 → 26 */
@@ -762,7 +762,7 @@ article h1 {
   </p>
 
   <ol>
-    <li>Passer le body des cartes à <strong>16&nbsp;px / 1.6</strong> (mobile) et <strong>18–19&nbsp;px / 1.65</strong> (desktop).</li>
+    <li>Passer le body des cartes à <strong>17&nbsp;px / 1.6</strong> (mobile) et <strong>19&nbsp;px / 1.65</strong> (desktop).</li>
     <li>Limiter la largeur des cartes à <strong>60–65ch</strong> (~580–620&nbsp;px), pas plus.</li>
     <li>Augmenter l'espace inter-carte à <strong>2rem minimum</strong>.</li>
     <li>Renforcer la hiérarchie&nbsp;: titre de carte en <strong>22&nbsp;px / 1.25 / 700</strong>, pas en 16&nbsp;px / 600.</li>
@@ -774,7 +774,7 @@ article h1 {
   <h3>TL;DR à coller dans le brief</h3>
 
   <p>
-    <strong>19 / 1.65 / 740px</strong> sur desktop. <strong>16 / 1.6 / pleine largeur avec 20&nbsp;px de padding</strong> sur mobile. <code>clamp()</code> pour interpoler entre les deux. <code>text-wrap: balance</code> sur les titres, <code>pretty</code> sur les paragraphes. Pas de noir pur. Une seule famille pour les titres, une autre pour le body, et c'est tout. Le reste, c'est de la cosmétique.
+    <strong>19 / 1.65 / 740px</strong> sur desktop. <strong>17 / 1.6 / pleine largeur avec 20&nbsp;px de padding</strong> sur mobile. <code>clamp()</code> pour interpoler entre les deux. <code>text-wrap: balance</code> sur les titres, <code>pretty</code> sur les paragraphes. Pas de noir pur. Une seule famille pour les titres, une autre pour le body, et c'est tout. Le reste, c'est de la cosmétique.
   </p>
 
 </article>
