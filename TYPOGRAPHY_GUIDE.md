@@ -7,7 +7,7 @@
 ## 1. Les 6 principes fondamentaux
 
 1. **Le confort de lecture > l'esthétique pure.** Une app comme Ideas.xyz mise tout sur le contenu : la typo doit disparaître au profit du sens.
-2. **Le rythme vertical compte plus que le `font-size`.** Un texte à 16px avec `line-height: 1.7` se lit mieux qu'un 18px à 1.3.
+2. **Le rythme vertical compte plus que le `font-size`.** Un texte à 17px avec `line-height: 1.7` se lit mieux qu'un 19px à 1.3.
 3. **Longueur de ligne (measure) idéale = 60-80 caractères, ou ~700-740px en absolu.** Au-delà, l'œil se perd. En dessous, la lecture est saccadée.
 4. **Mobile ≠ Desktop réduit.** Sur mobile, on monte le `font-size` (paradoxalement) parce que la distance œil-écran est plus courte mais la concentration plus fragile.
 5. **Pas de noir pur (#000) sur blanc pur (#FFF).** Trop contrasté = fatigue. Préférer `#1a1a1a` ou `#202020` sur `#FFFFFF` (ou `#FAFAFA`).
@@ -21,7 +21,7 @@
 
 | Élément       | Font-size      | Line-height | Font-weight | Letter-spacing | Margin |
 | ------------- | -------------- | ----------- | ----------- | -------------- | ------ |
-| **Display / Hero**     | `64-80px` (4rem - 5rem) | `1.05` - `1.1` | 800 | `-0.025em` à `-0.03em` | `24px` bottom |
+| **Display / Hero**     | `52-64px` (3.25rem - 4rem) | `1.08` - `1.1` ⭐ | 800 | `-0.025em` à `-0.03em` | `24px` bottom |
 | **H1** (titre article) | `44-52px` (2.75rem - 3.25rem) | `1.1` - `1.15` | 700 - 800 | `-0.022em` | `24px` bottom |
 | **H2** (section)       | `32-36px` (2rem - 2.25rem) | `1.2` - `1.25` | 700 | `-0.018em` | `60-96px` top, `20px` bottom |
 | **H3** (sous-section)  | `24-26px` (1.5rem - 1.625rem) | `1.3` | 600 - 700 | `-0.012em` | `40-60px` top, `12px` bottom |
@@ -38,17 +38,17 @@
 
 | Élément       | Font-size      | Line-height | Font-weight |
 | ------------- | -------------- | ----------- | ----------- |
-| **Display / Hero** | `32-44px` | `1.08` - `1.1` | 800 |
+| **Display / Hero** | `36-48px` | `1.13` - `1.18` ⭐ | 800 |
 | **H1**        | `28-32px`      | `1.15` - `1.2`  | 700 - 800 |
 | **H2**        | `24-26px`      | `1.25` | 700 |
 | **H3**        | `19-21px`      | `1.35` | 600 |
 | **H4**        | `17px`         | `1.4` | 600 |
-| **Body**      | `16px` ⭐      | `1.6` | 400 |
+| **Body**      | `17px` ⭐      | `1.6` | 400 |
 | **Lead**      | `18-19px`      | `1.55` | 400 |
 | **Caption**   | `13-14px`      | `1.5` | 400 |
 | **Blockquote**| `18-20px`      | `1.5` | 400 italique |
 
-⭐ **16px est le standard iOS / Apple HIG.** C'est le minimum absolu (en dessous, iOS déclenche un zoom involontaire sur les `input`). Ne descends jamais en dessous, mais 16px est largement suffisant pour des cards de contenu, du listing ou même des paragraphes courts. Si l'app fait du long-form pur (newsletter, blog), tu peux pousser à 17px sans problème, mais 16 reste le choix le plus "natif".
+⭐ **Pourquoi 17px et pas 16px sur mobile ?** Avec un body en **serif** (Source Serif 4, Charter, etc.), le x-height est plus petit qu'avec un sans-serif comme Inter. À taille égale, un serif paraît visuellement ~6-8% plus petit. Donc 16px serif est perçu comme du 15px Inter. Pour compenser : **17px en serif = 16px en sans visuellement**. Si tu utilises Inter pour le body sur mobile, tu peux rester à 16px sans souci. Pour du long-form en serif : 17px est le sweet spot.
 
 ---
 
@@ -65,9 +65,9 @@ line-height = f(font-size), inversement proportionnel
 | 18-20px   | 1.6 - 1.65        | Body desktop |
 | 22-24px   | 1.5 - 1.55        | Lead, blockquote |
 | 26-32px   | 1.3 - 1.4         | H3, H2 mobile |
-| 36-48px   | 1.15 - 1.25       | H2 desktop, H1 mobile |
-| 52-64px   | 1.1 - 1.15        | H1 desktop |
-| 64-80px+  | **1.08** (sweet spot)  | Display / Hero |
+| 36-48px   | **1.13 - 1.18** (sweet spot mobile hero) | H2 desktop, hero mobile |
+| 52-64px   | 1.08 - 1.12       | H1 desktop, hero desktop |
+| 64-80px+  | **1.05 - 1.08**   | Display ultra-large |
 
 **Le piège classique** (qu'on voit sur Ideas.xyz) : appliquer `line-height: 1.5` partout, ce qui donne :
 - Des titres trop étalés (mou, peu impactant)
@@ -81,8 +81,8 @@ Au lieu de mediaqueries, utilise `clamp()` pour des transitions fluides desktop 
 
 ```css
 :root {
-  /* Body : 16px sur mobile → 19px sur desktop */
-  --fs-body: clamp(1rem, 0.875rem + 0.4vw, 1.1875rem);
+  /* Body : 17px sur mobile → 19px sur desktop (serif) */
+  --fs-body: clamp(1.0625rem, 0.95rem + 0.36vw, 1.1875rem);
 
   /* H1 : 32px sur mobile → 52px sur desktop */
   --fs-h1: clamp(2rem, 1.4rem + 3vw, 3.25rem);
@@ -282,7 +282,7 @@ Le lead/intro plus étroit que le body donne une lecture en "entonnoir" qui guid
 | **Linear blog** | 17px      | 1.6              | Inter              | Inter             | ~640px      |
 | **Stripe blog** | 18px      | 1.65             | Sohne (sans)       | Sohne             | ~620px      |
 | **Stripe Press** | 19px     | 1.6              | Sohne (sans)       | Sohne             | ~700px      |
-| **🎯 Reco Ideas** | **19px / 16px mob** | **1.65 / 1.6 mob** | **Source Serif 4** | **Inter (sans)**   | **740px**  |
+| **🎯 Reco Ideas** | **19px / 17px mob** | **1.65 / 1.6 mob** | **Source Serif 4** | **Inter (sans)**   | **740px**  |
 
 ---
 
@@ -292,7 +292,7 @@ Si on devait corriger Ideas.xyz en quelques lignes de CSS, voici ce que je ferai
 
 ```css
 :root {
-  --fs-body:  clamp(1rem, 0.875rem + 0.4vw, 1.1875rem); /* 16→19px */
+  --fs-body:  clamp(1.0625rem, 0.95rem + 0.36vw, 1.1875rem); /* 17→19px (serif) */
   --fs-lead:  clamp(1.125rem, 1rem + 0.65vw, 1.375rem); /* 18→22px */
   --lh-body:  1.65;
   --measure:  min(740px, 100% - 2rem);
@@ -338,9 +338,9 @@ article h3 { font-size: clamp(1.25rem, 1.1rem + 0.75vw, 1.625rem); line-height: 
 
 ## 13. Checklist finale avant prod
 
-- [ ] Body = 16px sur mobile (norme iOS), 19px sur desktop (max 20)
+- [ ] Body = **17px sur mobile (serif)** ou 16px (sans), 19px sur desktop
 - [ ] Line-height body entre 1.55 et 1.7
-- [ ] Line-height des hero/display titles à **1.08** (pas 1.05, c'est trop serré)
+- [ ] Line-height des hero titles : **1.1 desktop, 1.15 mobile** (les petits titres demandent plus d'air)
 - [ ] `max-width` 740px desktop (`min(740px, 100% - 2rem)`)
 - [ ] **Lead** plus étroit que le body (44ch vs 60-80ch)
 - [ ] **Espace avant H2** entre 60 et 96px (clamp), pas le default 32px
@@ -362,6 +362,6 @@ article h3 { font-size: clamp(1.25rem, 1.1rem + 0.75vw, 1.625rem); line-height: 
 > = font-size 19px, line-height 1.65, max-width 740px sur desktop.
 > Body en **Source Serif 4**, titres en **Inter**.
 > Espace avant H2 : **60-96px**. Lead plus étroit que le body : **44ch**.
-> Hero / display title line-height : **1.08**.
+> Hero title line-height : **1.1 desktop / 1.15 mobile**.
 
-Sur mobile : **16px / 1.6 / pleine largeur avec padding 20px**.
+Sur mobile : **17px / 1.6 / pleine largeur avec padding 20px** (serif). Si tu utilises un sans-serif comme Inter pour le body, tu peux descendre à 16px sans perte de lisibilité.

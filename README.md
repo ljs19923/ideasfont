@@ -9,7 +9,7 @@ Guide typographique pour apps de lecture (Substack / Medium grade), avec showcas
 
 ## TL;DR
 
-> **19 / 1.65 / 740px** sur desktop. **16 / 1.6 / pleine largeur** sur mobile.
+> **19 / 1.65 / 740px** sur desktop. **17 / 1.6 / pleine largeur** sur mobile (serif).
 > Body en **Source Serif 4**, titres en **Inter**.
 
 ## Voir en ligne

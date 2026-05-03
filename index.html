@@ -1,702 +1,923 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Typography Guide, The Ultimate Reading Experience</title>
-<meta name="description" content="Showcase typographique pour apps de lecture (Medium / Substack grade)." />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Typography Guide, The Ultimate Reading Experience</title>
+    <meta
+      name="description"
+      content="Showcase typographique pour apps de lecture (Medium / Substack grade)."
+    />
 
-<!-- Polices via Google Fonts : Inter (sans) + Source Serif 4 (serif premium) -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Source+Serif+4:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+    <!-- Polices via Google Fonts : Inter (sans) + Source Serif 4 (serif premium) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Source+Serif+4:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
 
-<style>
-  /* ============================================================
+    <style>
+      /* ============================================================
      0. FONT-FALLBACKS AJUSTÉS (anti-FOUT / anti-shift visuel)
      ============================================================
      On définit des "alias" de fallback dont les métriques sont
      manuellement ajustées pour matcher Source Serif 4 et Inter.
      Pendant le swap Google Fonts, l'utilisateur ne voit AUCUN
      décalage visuel (taille, x-height, line-height). */
-  @font-face {
-    font-family: "Source Serif Fallback";
-    src: local("Charter"), local("Iowan Old Style"), local("Georgia"),
-         local("Times New Roman");
-    size-adjust: 102%;
-    ascent-override: 96%;
-    descent-override: 28%;
-    line-gap-override: 0%;
-  }
-  @font-face {
-    font-family: "Inter Fallback";
-    src: local("Helvetica Neue"), local("Arial"), local("Roboto");
-    size-adjust: 107%;
-    ascent-override: 90%;
-    descent-override: 22%;
-    line-gap-override: 0%;
-  }
+      @font-face {
+        font-family: "Source Serif Fallback";
+        src:
+          local("Charter"), local("Iowan Old Style"), local("Georgia"),
+          local("Times New Roman");
+        size-adjust: 102%;
+        ascent-override: 96%;
+        descent-override: 28%;
+        line-gap-override: 0%;
+      }
+      @font-face {
+        font-family: "Inter Fallback";
+        src: local("Helvetica Neue"), local("Arial"), local("Roboto");
+        size-adjust: 107%;
+        ascent-override: 90%;
+        descent-override: 22%;
+        line-gap-override: 0%;
+      }
 
-  /* ============================================================
+      /* ============================================================
      1. DESIGN TOKENS
      ============================================================ */
-  :root {
-    /* --- Typography fluid scale (mobile → desktop via clamp) --- */
-    --fs-body:    clamp(1.0625rem, 0.95rem + 0.36vw, 1.1875rem); /* 17 → 19 */
-    --fs-lead:    clamp(1.1875rem, 1rem + 0.9vw,     1.5rem);    /* 19 → 24 */
-    --fs-small:   clamp(0.875rem,  0.83rem + 0.2vw,  0.9375rem); /* 14 → 15 */
-    --fs-meta:    clamp(0.8125rem, 0.78rem + 0.15vw, 0.875rem);  /* 13 → 14 */
+      :root {
+        /* --- Typography fluid scale (mobile → desktop via clamp) --- */
+        --fs-body: clamp(1.0625rem, 0.95rem + 0.36vw, 1.1875rem); /* 17 → 19 */
+        --fs-lead: clamp(1.1875rem, 1rem + 0.9vw, 1.5rem); /* 19 → 24 */
+        --fs-small: clamp(0.875rem, 0.83rem + 0.2vw, 0.9375rem); /* 14 → 15 */
+        --fs-meta: clamp(0.8125rem, 0.78rem + 0.15vw, 0.875rem); /* 13 → 14 */
 
-    --fs-h1:      clamp(2rem,      1.4rem + 3vw,     3.5rem);    /* 32 → 56 */
-    --fs-h2:      clamp(1.625rem,  1.3rem + 1.6vw,   2.25rem);   /* 26 → 36 */
-    --fs-h3:      clamp(1.25rem,   1.1rem + 0.75vw,  1.625rem);  /* 20 → 26 */
-    --fs-h4:      clamp(1.125rem,  1.05rem + 0.4vw,  1.25rem);   /* 18 → 20 */
+        --fs-h1: clamp(2rem, 1.4rem + 3vw, 3.5rem); /* 32 → 56 */
+        --fs-h2: clamp(1.625rem, 1.3rem + 1.6vw, 2.25rem); /* 26 → 36 */
+        --fs-h3: clamp(1.25rem, 1.1rem + 0.75vw, 1.625rem); /* 20 → 26 */
+        --fs-h4: clamp(1.125rem, 1.05rem + 0.4vw, 1.25rem); /* 18 → 20 */
 
-    --fs-display: clamp(2.5rem,    1.5rem + 5vw,     5rem);      /* hero 40 → 80 */
+        --fs-display: clamp(2.5rem, 1.5rem + 5vw, 5rem); /* hero 40 → 80 */
 
-    /* --- Line heights --- */
-    --lh-tight:    1.1;
-    --lh-snug:     1.25;
-    --lh-normal:   1.4;
-    --lh-relaxed:  1.6;
-    --lh-loose:    1.75;
-    --lh-body:     1.65;
-    --lh-lead:     1.55;
+        /* --- Line heights --- */
+        --lh-tight: 1.1;
+        --lh-snug: 1.25;
+        --lh-normal: 1.4;
+        --lh-relaxed: 1.6;
+        --lh-loose: 1.75;
+        --lh-body: 1.65;
+        --lh-lead: 1.55;
 
-    /* --- Tracking --- */
-    --ls-display: -0.028em;
-    --ls-h1:      -0.022em;
-    --ls-h2:      -0.018em;
-    --ls-h3:      -0.012em;
-    --ls-body:    -0.003em;
-    --ls-meta:     0.01em;
+        /* --- Tracking --- */
+        --ls-display: -0.028em;
+        --ls-h1: -0.022em;
+        --ls-h2: -0.018em;
+        --ls-h3: -0.012em;
+        --ls-body: -0.003em;
+        --ls-meta: 0.01em;
 
-    /* --- Spacing rythmic --- */
-    --space-2xs:  0.25rem;
-    --space-xs:   0.5rem;
-    --space-sm:   0.75rem;
-    --space-md:   1.25rem;
-    --space-lg:   2rem;
-    --space-xl:   3rem;
-    --space-2xl:  5rem;
+        /* --- Spacing rythmic --- */
+        --space-2xs: 0.25rem;
+        --space-xs: 0.5rem;
+        --space-sm: 0.75rem;
+        --space-md: 1.25rem;
+        --space-lg: 2rem;
+        --space-xl: 3rem;
+        --space-2xl: 5rem;
 
-    /* Espace de section (entre H2), fluide mobile → desktop */
-    --space-section:    clamp(3.75rem, 2.5rem + 4.5vw, 6rem);   /* ~60 → 96px */
-    --space-subsection: clamp(2.5rem,  1.9rem + 2.2vw, 3.75rem); /* ~40 → 60px */
+        /* Espace de section (entre H2), fluide mobile → desktop */
+        --space-section: clamp(3.75rem, 2.5rem + 4.5vw, 6rem); /* ~60 → 96px */
+        --space-subsection: clamp(
+          2.5rem,
+          1.9rem + 2.2vw,
+          3.75rem
+        ); /* ~40 → 60px */
 
-    /* --- Measure (longueur de ligne) : 740px max, fluide en dessous (gutter 20px = aligné header/hero) --- */
-    --measure:    min(740px, 100% - 2.5rem);
+        /* --- Measure (longueur de ligne) : 740px max, fluide en dessous (gutter 20px = aligné header/hero) --- */
+        --measure: min(740px, 100% - 2.5rem);
 
-    /* --- Couleurs (light) --- */
-    --c-bg:        #fafaf7;
-    --c-surface:   #ffffff;
-    --c-text:      #1a1a1a;
-    --c-text-muted:#57606a;
-    --c-heading:   #0d0d0d;
-    --c-border:    #e8e6e1;
-    --c-accent:    #7c3aed;
-    --c-link:      #1a73e8;
-    --c-code-bg:   #f3f1ec;
-    --c-quote-bar: #7c3aed;
+        /* --- Couleurs (light) --- */
+        --c-bg: #fafaf7;
+        --c-surface: #ffffff;
+        --c-text: #1a1a1a;
+        --c-text-muted: #57606a;
+        --c-heading: #0d0d0d;
+        --c-border: #e8e6e1;
+        --c-accent: #7c3aed;
+        --c-link: #1a73e8;
+        --c-code-bg: #f3f1ec;
+        --c-quote-bar: #7c3aed;
 
-    /* --- Polices (fallbacks ajustés pour éviter le shift visuel au swap) --- */
-    --ff-sans:  "Inter", "Inter Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    --ff-serif: "Source Serif 4", "Source Serif Fallback", Charter, "Iowan Old Style", Georgia, serif;
-    --ff-mono:  "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+        /* --- Polices (fallbacks ajustés pour éviter le shift visuel au swap) --- */
+        --ff-sans:
+          "Inter", "Inter Fallback", -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        --ff-serif:
+          "Source Serif 4", "Source Serif Fallback", Charter, "Iowan Old Style",
+          Georgia, serif;
+        --ff-mono: "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
 
-    /* --- Radii --- */
-    --radius-sm: 6px;
-    --radius-md: 12px;
-    --radius-lg: 20px;
-  }
+        /* --- Radii --- */
+        --radius-sm: 6px;
+        --radius-md: 12px;
+        --radius-lg: 20px;
+      }
 
-  [data-theme="dark"] {
-    --c-bg:        #0f0f10;
-    --c-surface:   #18181a;
-    --c-text:      #e6e6e6;
-    --c-text-muted:#9ca3af;
-    --c-heading:   #f5f5f5;
-    --c-border:    #2a2a2c;
-    --c-accent:    #a78bfa;
-    --c-link:      #93c5fd;
-    --c-code-bg:   #1f1f21;
-    --c-quote-bar: #a78bfa;
-  }
+      [data-theme="dark"] {
+        --c-bg: #0f0f10;
+        --c-surface: #18181a;
+        --c-text: #e6e6e6;
+        --c-text-muted: #9ca3af;
+        --c-heading: #f5f5f5;
+        --c-border: #2a2a2c;
+        --c-accent: #a78bfa;
+        --c-link: #93c5fd;
+        --c-code-bg: #1f1f21;
+        --c-quote-bar: #a78bfa;
+      }
 
-  /* ============================================================
+      /* ============================================================
      2. RESET & GLOBAL
      ============================================================ */
-  *, *::before, *::after { box-sizing: border-box; }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
 
-  html {
-    /* 100% = respecte la base utilisateur (16px par défaut sur navigateurs std) */
-    font-size: 100%;
-    -webkit-text-size-adjust: 100%;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    scroll-behavior: smooth;
-    /* Signal explicite au navigateur sur le thème géré (évite l'auto-dark de Telegram) */
-    color-scheme: light dark;
-  }
-  html[data-theme="light"] { color-scheme: light; }
-  html[data-theme="dark"]  { color-scheme: dark; }
+      html {
+        /* 100% = respecte la base utilisateur (16px par défaut sur navigateurs std) */
+        font-size: 100%;
+        -webkit-text-size-adjust: 100%;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        scroll-behavior: smooth;
+        /* Signal explicite au navigateur sur le thème géré (évite l'auto-dark de Telegram) */
+        color-scheme: light dark;
+      }
+      html[data-theme="light"] {
+        color-scheme: light;
+      }
+      html[data-theme="dark"] {
+        color-scheme: dark;
+      }
 
-  body {
-    margin: 0;
-    background: var(--c-bg);
-    color: var(--c-text);
-    font-family: var(--ff-serif);
-    font-size: var(--fs-body);
-    line-height: var(--lh-body);
-    letter-spacing: var(--ls-body);
-    font-feature-settings: "kern", "liga", "calt", "onum";
-    transition: background-color .25s ease, color .25s ease;
-    hanging-punctuation: first last;
-    /* Filet de sécurité contre les overflows horizontaux résiduels (header sticky qui se "coupe") */
-    overflow-x: clip;
-  }
+      body {
+        margin: 0;
+        background: var(--c-bg);
+        color: var(--c-text);
+        font-family: var(--ff-serif);
+        font-size: var(--fs-body);
+        line-height: var(--lh-body);
+        letter-spacing: var(--ls-body);
+        font-feature-settings: "kern", "liga", "calt", "onum";
+        transition:
+          background-color 0.25s ease,
+          color 0.25s ease;
+        hanging-punctuation: first last;
+        /* Filet de sécurité contre les overflows horizontaux résiduels (header sticky qui se "coupe") */
+        overflow-x: clip;
+      }
 
-  /* ============================================================
+      /* ============================================================
      3. HEADINGS
      ============================================================ */
-  h1, h2, h3, h4 {
-    font-family: var(--ff-sans);
-    color: var(--c-heading);
-    margin: 0;
-    text-wrap: balance;
-    font-feature-settings: "ss01", "cv11", "cv02", "kern";
-  }
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: var(--ff-sans);
+        color: var(--c-heading);
+        margin: 0;
+        text-wrap: balance;
+        font-feature-settings: "ss01", "cv11", "cv02", "kern";
+      }
 
-  h1 {
-    font-size: var(--fs-h1);
-    line-height: var(--lh-tight);
-    letter-spacing: var(--ls-h1);
-    font-weight: 800;
-    margin-bottom: var(--space-md);
-  }
+      h1 {
+        font-size: var(--fs-h1);
+        line-height: var(--lh-tight);
+        letter-spacing: var(--ls-h1);
+        font-weight: 800;
+        margin-bottom: var(--space-md);
+      }
 
-  h2 {
-    font-size: var(--fs-h2);
-    line-height: var(--lh-snug);
-    letter-spacing: var(--ls-h2);
-    font-weight: 700;
-    margin-top: var(--space-section);
-    margin-bottom: var(--space-md);
-  }
+      h2 {
+        font-size: var(--fs-h2);
+        line-height: var(--lh-snug);
+        letter-spacing: var(--ls-h2);
+        font-weight: 700;
+        margin-top: var(--space-section);
+        margin-bottom: var(--space-md);
+      }
 
-  h3 {
-    font-size: var(--fs-h3);
-    line-height: var(--lh-normal);
-    letter-spacing: var(--ls-h3);
-    font-weight: 700;
-    margin-top: var(--space-subsection);
-    margin-bottom: var(--space-sm);
-  }
+      h3 {
+        font-size: var(--fs-h3);
+        line-height: var(--lh-normal);
+        letter-spacing: var(--ls-h3);
+        font-weight: 700;
+        margin-top: var(--space-subsection);
+        margin-bottom: var(--space-sm);
+      }
 
-  h4 {
-    font-size: var(--fs-h4);
-    line-height: var(--lh-normal);
-    font-weight: 600;
-    margin-top: var(--space-md);
-    margin-bottom: var(--space-2xs);
-  }
+      h4 {
+        font-size: var(--fs-h4);
+        line-height: var(--lh-normal);
+        font-weight: 600;
+        margin-top: var(--space-md);
+        margin-bottom: var(--space-2xs);
+      }
 
-  /* ============================================================
+      /* ============================================================
      4. BODY TEXT
      ============================================================ */
-  p {
-    margin: 0 0 1.4em 0;
-    text-wrap: pretty;
-    hyphens: auto;
-    overflow-wrap: break-word;
-  }
+      p {
+        margin: 0 0 1.4em 0;
+        text-wrap: pretty;
+        hyphens: auto;
+        overflow-wrap: break-word;
+      }
 
-  p.lead {
-    font-size: var(--fs-lead);
-    line-height: var(--lh-lead);
-    color: var(--c-text-muted);
-    font-weight: 400;
-    margin-bottom: 2em;
-    letter-spacing: -0.005em;
-  }
+      p.lead {
+        font-size: var(--fs-lead);
+        line-height: var(--lh-lead);
+        color: var(--c-text-muted);
+        font-weight: 400;
+        margin-bottom: 2em;
+        letter-spacing: -0.005em;
+      }
 
-  a {
-    color: var(--c-link);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-    transition: color .15s ease;
-  }
-  a:hover { text-decoration-thickness: 2px; }
-  a:focus-visible {
-    outline: 2px solid var(--c-accent);
-    outline-offset: 3px;
-    border-radius: 2px;
-  }
+      a {
+        color: var(--c-link);
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 3px;
+        transition: color 0.15s ease;
+      }
+      a:hover {
+        text-decoration-thickness: 2px;
+      }
+      a:focus-visible {
+        outline: 2px solid var(--c-accent);
+        outline-offset: 3px;
+        border-radius: 2px;
+      }
 
-  strong { font-weight: 700; color: var(--c-heading); }
-  em { font-style: italic; }
+      strong {
+        font-weight: 700;
+        color: var(--c-heading);
+      }
+      em {
+        font-style: italic;
+      }
 
-  /* Listes */
-  ul, ol {
-    padding-left: 1.4em;
-    margin: 0 0 1.4em 0;
-  }
-  li { margin-bottom: 0.5em; }
-  li::marker { color: var(--c-text-muted); }
+      /* Listes */
+      ul,
+      ol {
+        padding-left: 1.4em;
+        margin: 0 0 1.4em 0;
+      }
+      li {
+        margin-bottom: 0.5em;
+      }
+      li::marker {
+        color: var(--c-text-muted);
+      }
 
-  /* Blockquote, la pièce maîtresse */
-  blockquote {
-    margin: 2em 0;
-    padding: 0.25em 0 0.25em 1.5rem;
-    border-left: 3px solid var(--c-quote-bar);
-    font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
-    line-height: 1.5;
-    font-style: italic;
-    color: var(--c-heading);
-    letter-spacing: -0.01em;
-  }
-  blockquote p:last-child { margin-bottom: 0; }
-  blockquote cite {
-    display: block;
-    margin-top: 0.75em;
-    font-size: var(--fs-small);
-    font-style: normal;
-    color: var(--c-text-muted);
-    font-family: var(--ff-sans);
-  }
-  blockquote cite::before { content: "· "; }
+      /* Blockquote, la pièce maîtresse */
+      blockquote {
+        margin: 2em 0;
+        padding: 0.25em 0 0.25em 1.5rem;
+        border-left: 3px solid var(--c-quote-bar);
+        font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+        line-height: 1.5;
+        font-style: italic;
+        color: var(--c-heading);
+        letter-spacing: -0.01em;
+      }
+      blockquote p:last-child {
+        margin-bottom: 0;
+      }
+      blockquote cite {
+        display: block;
+        margin-top: 0.75em;
+        font-size: var(--fs-small);
+        font-style: normal;
+        color: var(--c-text-muted);
+        font-family: var(--ff-sans);
+      }
+      blockquote cite::before {
+        content: "· ";
+      }
 
-  /* Code */
-  code, pre {
-    font-family: var(--ff-mono);
-    font-size: 0.9em;
-  }
-  code {
-    background: var(--c-code-bg);
-    padding: 0.15em 0.4em;
-    border-radius: 4px;
-    border: 1px solid var(--c-border);
-  }
-  pre {
-    background: var(--c-code-bg);
-    border: 1px solid var(--c-border);
-    border-radius: var(--radius-md);
-    padding: 1.25rem;
-    overflow-x: auto;
-    line-height: 1.55;
-    margin: 2em 0;
-    font-size: 0.875rem;
-  }
-  pre code {
-    background: none;
-    border: none;
-    padding: 0;
-  }
+      /* Code */
+      code,
+      pre {
+        font-family: var(--ff-mono);
+        font-size: 0.9em;
+      }
+      code {
+        background: var(--c-code-bg);
+        padding: 0.15em 0.4em;
+        border-radius: 4px;
+        border: 1px solid var(--c-border);
+      }
+      pre {
+        background: var(--c-code-bg);
+        border: 1px solid var(--c-border);
+        border-radius: var(--radius-md);
+        padding: 1.25rem;
+        overflow-x: auto;
+        line-height: 1.55;
+        margin: 2em 0;
+        font-size: 0.875rem;
+      }
+      pre code {
+        background: none;
+        border: none;
+        padding: 0;
+      }
 
-  hr {
-    border: 0;
-    height: 1px;
-    background: var(--c-border);
-    margin: 3em 0;
-  }
+      hr {
+        border: 0;
+        height: 1px;
+        background: var(--c-border);
+        margin: 3em 0;
+      }
 
-  /* ============================================================
+      /* ============================================================
      5. LAYOUT
      ============================================================ */
-  .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background: color-mix(in srgb, var(--c-bg) 85%, transparent);
-    backdrop-filter: saturate(180%) blur(14px);
-    -webkit-backdrop-filter: saturate(180%) blur(14px);
-    border-bottom: 1px solid var(--c-border);
-  }
-  .site-header__inner {
-    max-width: 1280px;
-    margin-inline: auto;
-    padding: var(--space-sm) clamp(1rem, 4vw, 2rem);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-md);
-  }
-  .brand {
-    font-family: var(--ff-sans);
-    font-weight: 800;
-    font-size: 1rem;
-    letter-spacing: -0.02em;
-    color: var(--c-heading);
-    text-decoration: none;
-  }
-  .brand span { color: var(--c-accent); }
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: color-mix(in srgb, var(--c-bg) 85%, transparent);
+        backdrop-filter: saturate(180%) blur(14px);
+        -webkit-backdrop-filter: saturate(180%) blur(14px);
+        border-bottom: 1px solid var(--c-border);
+        /* Active la GPU layer : réduit les artefacts visuels dans les WebViews
+       (Telegram, etc.) qui rétractent leur barre de navigation au scroll. */
+        transform: translateZ(0);
+        will-change: transform;
+      }
+      /* Barre de progression du scroll. Vit en absolute sur la border-bottom
+     du header pour que ça reste collé au header sticky. */
+      .scroll-progress {
+        position: absolute;
+        left: 0;
+        bottom: -1px;
+        height: 2px;
+        width: var(--progress, 0%);
+        background: var(--c-accent);
+        transition: width 0.08s linear;
+        pointer-events: none;
+        will-change: width;
+      }
+      .site-header__inner {
+        max-width: 1280px;
+        margin-inline: auto;
+        padding: var(--space-sm) clamp(1rem, 4vw, 2rem);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-md);
+      }
+      .brand {
+        font-family: var(--ff-sans);
+        font-weight: 800;
+        font-size: 1rem;
+        letter-spacing: -0.02em;
+        color: var(--c-heading);
+        text-decoration: none;
+      }
+      .brand span {
+        color: var(--c-accent);
+      }
 
-  .toolbar {
-    display: flex;
-    gap: var(--space-xs);
-    align-items: center;
-    font-family: var(--ff-sans);
-    font-size: var(--fs-meta);
-  }
-  .toolbar button {
-    appearance: none;
-    border: 1px solid var(--c-border);
-    background: var(--c-surface);
-    color: var(--c-text);
-    padding: 0.45rem 0.9rem;
-    border-radius: 999px;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background .15s ease, border-color .15s ease, transform .1s ease;
-  }
-  .toolbar button:hover { border-color: var(--c-accent); }
-  .toolbar button:active { transform: scale(0.97); }
-  .toolbar button[aria-pressed="true"] {
-    background: var(--c-heading);
-    color: var(--c-surface);
-    border-color: var(--c-heading);
-  }
+      .toolbar {
+        display: flex;
+        gap: var(--space-xs);
+        align-items: center;
+        font-family: var(--ff-sans);
+        font-size: var(--fs-meta);
+      }
+      .toolbar button {
+        appearance: none;
+        border: 1px solid var(--c-border);
+        background: var(--c-surface);
+        color: var(--c-text);
+        padding: 0.45rem 0.9rem;
+        border-radius: 999px;
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: 500;
+        cursor: pointer;
+        transition:
+          background 0.15s ease,
+          border-color 0.15s ease,
+          transform 0.1s ease;
+      }
+      .toolbar button:hover {
+        border-color: var(--c-accent);
+      }
+      .toolbar button:active {
+        transform: scale(0.97);
+      }
+      .toolbar button[aria-pressed="true"] {
+        background: var(--c-heading);
+        color: var(--c-surface);
+        border-color: var(--c-heading);
+      }
 
-  /* Hero */
-  .hero {
-    max-width: 1280px;
-    margin-inline: auto;
-    padding: clamp(3.5rem, 8vw, 6.5rem) clamp(1rem, 4vw, 2rem) clamp(3rem, 6vw, 5rem);
-    text-align: center;
-  }
-  .hero__eyebrow {
-    font-family: var(--ff-sans);
-    font-size: var(--fs-meta);
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--c-accent);
-    margin-bottom: var(--space-md);
-  }
-  .hero__title {
-    font-size: var(--fs-display);
-    line-height: 1.1;
-    letter-spacing: var(--ls-display);
-    font-weight: 800;
-    margin-bottom: var(--space-md);
-    background: linear-gradient(180deg, var(--c-heading) 0%, color-mix(in srgb, var(--c-heading) 70%, var(--c-text-muted)) 100%);
-    -webkit-background-clip: text;
-            background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  /* Découpage du titre par ligne — répartition différente mobile / desktop */
-  .hero__line { display: block; }
-  .hero__only-m { display: inline; }   /* affiché sur mobile uniquement */
-  .hero__only-d { display: none; }
-  @media (min-width: 641px) {
-    .hero__only-m { display: none; }
-    .hero__only-d { display: inline; } /* affiché sur desktop uniquement */
-  }
-  .hero__sub {
-    font-size: var(--fs-lead);
-    line-height: var(--lh-lead);
-    color: var(--c-text-muted);
-    max-width: 44ch;
-    margin: 0 auto;
-  }
+      /* Hero */
+      .hero {
+        max-width: 1280px;
+        margin-inline: auto;
+        padding: clamp(3.5rem, 8vw, 6.5rem) clamp(1rem, 4vw, 2rem)
+          clamp(3rem, 6vw, 5rem);
+        text-align: center;
+      }
+      .hero__eyebrow {
+        font-family: var(--ff-sans);
+        font-size: var(--fs-meta);
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--c-accent);
+        margin-bottom: var(--space-md);
+      }
+      .hero__title {
+        font-size: var(--fs-display);
+        line-height: 1.1;
+        letter-spacing: var(--ls-display);
+        font-weight: 800;
+        margin-bottom: var(--space-md);
+        background: linear-gradient(
+          180deg,
+          var(--c-heading) 0%,
+          color-mix(in srgb, var(--c-heading) 70%, var(--c-text-muted)) 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      /* Découpage du titre par ligne — répartition différente mobile / desktop */
+      .hero__line {
+        display: block;
+      }
+      .hero__only-m {
+        display: inline;
+      } /* affiché sur mobile uniquement */
+      .hero__only-d {
+        display: none;
+      }
+      @media (min-width: 641px) {
+        .hero__only-m {
+          display: none;
+        }
+        .hero__only-d {
+          display: inline;
+        } /* affiché sur desktop uniquement */
+      }
+      .hero__sub {
+        font-size: var(--fs-lead);
+        line-height: var(--lh-lead);
+        color: var(--c-text-muted);
+        max-width: 44ch;
+        margin: 0 auto;
+      }
 
-  /* Article */
-  article.prose {
-    width: var(--measure);
-    margin-inline: auto;
-    padding-block: clamp(2rem, 4vw, 3rem) clamp(4rem, 8vw, 7rem);
-  }
+      /* Article */
+      article.prose {
+        width: var(--measure);
+        margin-inline: auto;
+        padding-block: clamp(2rem, 4vw, 3rem) clamp(4rem, 8vw, 7rem);
+      }
 
-  .meta-bar {
-    display: flex;
-    gap: var(--space-md);
-    align-items: center;
-    flex-wrap: wrap;
-    font-family: var(--ff-sans);
-    font-size: var(--fs-meta);
-    color: var(--c-text-muted);
-    padding-bottom: var(--space-md);
-    margin-bottom: var(--space-lg);
-    border-bottom: 1px solid var(--c-border);
-  }
-  .meta-bar__author { font-weight: 600; color: var(--c-text); }
-  .meta-bar__dot { opacity: 0.4; }
+      .meta-bar {
+        display: flex;
+        gap: var(--space-md);
+        align-items: center;
+        flex-wrap: wrap;
+        font-family: var(--ff-sans);
+        font-size: var(--fs-meta);
+        color: var(--c-text-muted);
+        padding-bottom: var(--space-md);
+        margin-bottom: var(--space-lg);
+        border-bottom: 1px solid var(--c-border);
+      }
+      .meta-bar__author {
+        font-weight: 600;
+        color: var(--c-text);
+      }
+      .meta-bar__dot {
+        opacity: 0.4;
+      }
 
-  /* Pull quote */
-  .pull-quote {
-    font-family: var(--ff-sans);
-    font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
-    line-height: 1.25;
-    font-weight: 700;
-    letter-spacing: -0.018em;
-    text-align: center;
-    color: var(--c-heading);
-    margin-block: 3em;
-    padding: 1.5em 0;
-    border-top: 1px solid var(--c-border);
-    border-bottom: 1px solid var(--c-border);
-    text-wrap: balance;
-  }
+      /* Pull quote */
+      .pull-quote {
+        font-family: var(--ff-sans);
+        font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+        line-height: 1.25;
+        font-weight: 700;
+        letter-spacing: -0.018em;
+        text-align: center;
+        color: var(--c-heading);
+        margin-block: 3em;
+        padding: 1.5em 0;
+        border-top: 1px solid var(--c-border);
+        border-bottom: 1px solid var(--c-border);
+        text-wrap: balance;
+      }
 
-  /* Comparison table */
-  .compare {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-md);
-    margin: var(--space-lg) 0;
-    font-family: var(--ff-sans);
-  }
-  @media (max-width: 640px) {
-    .compare { grid-template-columns: 1fr; }
-  }
-  .compare__card {
-    border: 1px solid var(--c-border);
-    border-radius: var(--radius-md);
-    padding: var(--space-md);
-    background: var(--c-surface);
-  }
-  .compare__card h4 {
-    font-family: var(--ff-sans);
-    font-size: 0.95rem;
-    margin: 0 0 var(--space-sm);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--c-text-muted);
-    font-weight: 600;
-  }
-  .compare__bad { font-size: 14px; line-height: 1.4; color: var(--c-text); }
-  .compare__good {
-    font-size: 1rem;
-    line-height: 1.6;
-    max-width: 60ch;
-    color: var(--c-text);
-  }
-  .badge {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 999px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    margin-bottom: var(--space-xs);
-  }
-  .badge--bad  { background: #fee2e2; color: #991b1b; }
-  .badge--good { background: #dcfce7; color: #166534; }
-  [data-theme="dark"] .badge--bad  { background: #450a0a; color: #fca5a5; }
-  [data-theme="dark"] .badge--good { background: #052e16; color: #86efac; }
+      /* Comparison table */
+      .compare {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-md);
+        margin: var(--space-lg) 0;
+        font-family: var(--ff-sans);
+      }
+      @media (max-width: 640px) {
+        .compare {
+          grid-template-columns: 1fr;
+        }
+      }
+      .compare__card {
+        border: 1px solid var(--c-border);
+        border-radius: var(--radius-md);
+        padding: var(--space-md);
+        background: var(--c-surface);
+      }
+      .compare__card h4 {
+        font-family: var(--ff-sans);
+        font-size: 0.95rem;
+        margin: 0 0 var(--space-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--c-text-muted);
+        font-weight: 600;
+      }
+      .compare__bad {
+        font-size: 14px;
+        line-height: 1.4;
+        color: var(--c-text);
+      }
+      .compare__good {
+        font-size: 1rem;
+        line-height: 1.6;
+        max-width: 60ch;
+        color: var(--c-text);
+      }
+      .badge {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 999px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        margin-bottom: var(--space-xs);
+      }
+      .badge--bad {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+      .badge--good {
+        background: #dcfce7;
+        color: #166534;
+      }
+      [data-theme="dark"] .badge--bad {
+        background: #450a0a;
+        color: #fca5a5;
+      }
+      [data-theme="dark"] .badge--good {
+        background: #052e16;
+        color: #86efac;
+      }
 
-  /* Spec table */
-  .spec-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: var(--ff-sans);
-    font-size: var(--fs-small);
-    margin: var(--space-md) 0 var(--space-lg);
-    border: 1px solid var(--c-border);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-  }
-  .spec-table th, .spec-table td {
-    padding: 0.75rem 1rem;
-    text-align: left;
-    border-bottom: 1px solid var(--c-border);
-  }
-  .spec-table th {
-    background: var(--c-code-bg);
-    font-weight: 600;
-    color: var(--c-heading);
-  }
-  .spec-table tr:last-child td { border-bottom: none; }
-  .spec-table td:first-child { font-weight: 600; color: var(--c-heading); }
-  .spec-table code {
-    font-size: 0.85em;
-    background: transparent;
-    border: none;
-    padding: 0;
-    color: var(--c-accent);
-  }
+      /* Spec table */
+      .spec-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: var(--ff-sans);
+        font-size: var(--fs-small);
+        margin: var(--space-md) 0 var(--space-lg);
+        border: 1px solid var(--c-border);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+      }
+      .spec-table th,
+      .spec-table td {
+        padding: 0.75rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid var(--c-border);
+      }
+      .spec-table th {
+        background: var(--c-code-bg);
+        font-weight: 600;
+        color: var(--c-heading);
+      }
+      .spec-table tr:last-child td {
+        border-bottom: none;
+      }
+      .spec-table td:first-child {
+        font-weight: 600;
+        color: var(--c-heading);
+      }
+      .spec-table code {
+        font-size: 0.85em;
+        background: transparent;
+        border: none;
+        padding: 0;
+        color: var(--c-accent);
+      }
 
-  /* Footer */
-  .site-footer {
-    border-top: 1px solid var(--c-border);
-    padding: var(--space-xl) clamp(1rem, 4vw, 2rem);
-    text-align: center;
-    font-family: var(--ff-sans);
-    font-size: var(--fs-meta);
-    color: var(--c-text-muted);
-  }
+      /* Footer */
+      .site-footer {
+        border-top: 1px solid var(--c-border);
+        padding: var(--space-xl) clamp(1rem, 4vw, 2rem);
+        text-align: center;
+        font-family: var(--ff-sans);
+        font-size: var(--fs-meta);
+        color: var(--c-text-muted);
+      }
 
-  /* ============================================================
+      /* ============================================================
      6. MOBILE OVERRIDES (≤ 640px)
      ============================================================ */
-  @media (max-width: 640px) {
-    .hero {
-      text-align: left;
-      padding-inline: 1.25rem;
-    }
-    .hero__sub {
-      margin-left: 0;
-      margin-right: 0;
-    }
-    .hero__title {
-      /* Évite que les sauts <br /> se transforment en 4+ lignes */
-      font-size: clamp(2.25rem, 1.65rem + 3.7vw, 3rem);
-      line-height: 1.15;
-    }
+      @media (max-width: 640px) {
+        .hero {
+          text-align: left;
+          padding-inline: 1.25rem;
+        }
+        .hero__sub {
+          margin-left: 0;
+          margin-right: 0;
+        }
+        .hero__title {
+          /* Évite que les sauts <br /> se transforment en 4+ lignes */
+          font-size: clamp(2.25rem, 1.65rem + 3.7vw, 3rem);
+          line-height: 1.15;
+        }
     .site-header__inner {
       padding-inline: 1.25rem;
     }
-    /* Tables : compression et word-break pour ne pas exploser le layout */
-    .spec-table th, .spec-table td {
-      padding: 0.5rem 0.625rem;
-      font-size: 12px;
-      word-break: break-word;
+    /* Sur mobile, on remplace le blur par un fond opaque : plus stable
+       dans les WebViews (Telegram, Instagram) qui ont du mal avec
+       backdrop-filter pendant les transitions de viewport. */
+    .site-header {
+      background: var(--c-bg);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
     }
-    /* Pre / code : police plus petite pour éviter les scroll-bar inutiles */
-    pre {
-      font-size: 0.8rem;
-      padding: 1rem;
-    }
-  }
+        /* Tables : compression et word-break pour ne pas exploser le layout */
+        .spec-table th,
+        .spec-table td {
+          padding: 0.5rem 0.625rem;
+          font-size: 12px;
+          word-break: break-word;
+        }
+        /* Pre / code : police plus petite pour éviter les scroll-bar inutiles */
+        pre {
+          font-size: 0.8rem;
+          padding: 1rem;
+        }
+      }
 
-  /* ============================================================
+      /* ============================================================
      7. ACCESSIBILITY & UX
      ============================================================ */
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
 
-  ::selection {
-    background: color-mix(in srgb, var(--c-accent) 30%, transparent);
-    color: var(--c-heading);
-  }
+      ::selection {
+        background: color-mix(in srgb, var(--c-accent) 30%, transparent);
+        color: var(--c-heading);
+      }
 
-  /* Auto-dark si pas de préférence */
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme]) {
-      --c-bg: #0f0f10;
-      --c-surface: #18181a;
-      --c-text: #e6e6e6;
-      --c-text-muted: #9ca3af;
-      --c-heading: #f5f5f5;
-      --c-border: #2a2a2c;
-      --c-code-bg: #1f1f21;
-    }
-  }
-</style>
-</head>
-<body>
-
-<!-- ============================================================
+      /* Auto-dark si pas de préférence */
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme]) {
+          --c-bg: #0f0f10;
+          --c-surface: #18181a;
+          --c-text: #e6e6e6;
+          --c-text-muted: #9ca3af;
+          --c-heading: #f5f5f5;
+          --c-border: #2a2a2c;
+          --c-code-bg: #1f1f21;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ============================================================
      HEADER
 ============================================================ -->
-<header class="site-header">
-  <div class="site-header__inner">
-    <a href="#" class="brand">Ideas<span>Font</span></a>
-    <div class="toolbar" role="toolbar" aria-label="Préférences de lecture">
-      <button id="btn-theme" type="button" aria-pressed="false" title="Basculer light / dark">Mode sombre</button>
-    </div>
-  </div>
-</header>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a href="#" class="brand">Ideas<span>Font</span></a>
+        <div class="toolbar" role="toolbar" aria-label="Préférences de lecture">
+          <button
+            id="btn-theme"
+            type="button"
+            aria-pressed="false"
+            title="Basculer light / dark"
+          >
+            Mode sombre
+          </button>
+        </div>
+      </div>
+      <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    </header>
 
-<!-- ============================================================
+    <!-- ============================================================
      HERO
 ============================================================ -->
-<section class="hero">
-  <div class="hero__eyebrow">Julien Levallois 2026</div>
-  <h1 class="hero__title"><span class="hero__line">La typographie<span class="hero__only-m"> qui</span></span><span class="hero__line"><span class="hero__only-m">disparaît au profit</span><span class="hero__only-d">qui disparaît au</span></span><span class="hero__line"><span class="hero__only-m">du sens.</span><span class="hero__only-d">profit du sens.</span></span></h1>
-  <p class="hero__sub">Un guide concret, et appliqué, pour atteindre le confort de lecture de Medium et Substack sur desktop comme sur mobile.</p>
-</section>
+    <section class="hero">
+      <div class="hero__eyebrow">Julien Levallois 2026</div>
+      <h1 class="hero__title">
+        <span class="hero__line"
+          >La typographie<span class="hero__only-m"> qui</span></span
+        ><span class="hero__line"
+          ><span class="hero__only-m">disparaît au profit</span
+          ><span class="hero__only-d">qui disparaît au</span></span
+        ><span class="hero__line"
+          ><span class="hero__only-m">du sens.</span
+          ><span class="hero__only-d">profit du sens.</span></span
+        >
+      </h1>
+      <p class="hero__sub">
+        Un guide concret, et appliqué, pour atteindre le confort de lecture de
+        Medium et Substack sur desktop comme sur mobile.
+      </p>
+    </section>
 
-<!-- ============================================================
+    <!-- ============================================================
      ARTICLE
 ============================================================ -->
-<article class="prose">
+    <article class="prose">
+      <div class="meta-bar">
+        <span class="meta-bar__author">IdeasFont</span>
+        <span class="meta-bar__dot">·</span>
+        <span>Lecture 7 min</span>
+        <span class="meta-bar__dot">·</span>
+        <span>3 mai 2026</span>
+      </div>
 
-  <div class="meta-bar">
-    <span class="meta-bar__author">IdeasFont</span>
-    <span class="meta-bar__dot">·</span>
-    <span>Lecture 7 min</span>
-    <span class="meta-bar__dot">·</span>
-    <span>3 mai 2026</span>
-  </div>
-
-  <p class="lead">
-    La plupart des sites de contenu négligent un détail invisible mais décisif&nbsp;: le rythme typographique. Trop d'espace, pas assez, des titres mous, des paragraphes tassés, et le lecteur abandonne sans savoir pourquoi. Ce document applique, ligne par ligne, ce qu'on devrait faire.
-  </p>
-
-  <h2>Pourquoi 19&nbsp;/&nbsp;1.65&nbsp;/&nbsp;740px est le standard d'or</h2>
-
-  <p>
-    Trois nombres suffisent à cadrer 80&nbsp;% du travail&nbsp;: <strong>19&nbsp;px de font-size, 1.65 de line-height, ~740&nbsp;px de largeur max</strong>. C'est ce que pratiquent Substack, le blog de Stripe, celui de Linear, Stratechery et la quasi-totalité des produits dont la lecture est le cœur. Pas une mode&nbsp;: la résultante de décennies de recherche en lisibilité, depuis le Bringhurst jusqu'aux études d'eye-tracking modernes.
-  </p>
-
-  <p>
-    Sur mobile, on reste sur du <strong>16&nbsp;px / 1.6 / pleine largeur avec 20&nbsp;px de padding latéral</strong>. C'est le défaut système iOS, le seuil au-dessous duquel iOS déclenche un zoom involontaire sur les <code>input</code>, et le confort suffisant pour des cards ou des paragraphes courts. Inutile de pousser plus haut sauf si l'app est 100&nbsp;% long-form.
-  </p>
-
-  <h3>Le piège du line-height uniforme</h3>
-
-  <p>
-    L'erreur la plus répandue, visible sur la plupart des sites de listing comme Ideas.xyz, c'est d'appliquer un <code>line-height: 1.5</code> partout. Résultat&nbsp;: les titres flottent (mou), les paragraphes étouffent (fatigant). La règle est simple et inverse&nbsp;:
-  </p>
-
-  <table class="spec-table">
-    <thead><tr><th>Font-size</th><th>Line-height idéal</th><th>Cas d'usage</th></tr></thead>
-    <tbody>
-      <tr><td>13–14 px</td><td><code>1.5–1.55</code></td><td>Captions, meta</td></tr>
-      <tr><td>16–17 px</td><td><code>1.6</code></td><td>Body mobile</td></tr>
-      <tr><td>18–20 px</td><td><code>1.6–1.65</code></td><td>Body desktop</td></tr>
-      <tr><td>22–24 px</td><td><code>1.5–1.55</code></td><td>Lead paragraph</td></tr>
-      <tr><td>26–32 px</td><td><code>1.3–1.4</code></td><td>H3, H2 mobile</td></tr>
-      <tr><td>36–48 px</td><td><code>1.15–1.25</code></td><td>H2 desktop, H1 mobile</td></tr>
-      <tr><td>52 px et plus</td><td><code>1.05–1.15</code></td><td>H1 desktop, hero</td></tr>
-    </tbody>
-  </table>
-
-  <h2>L'avant / après en une démonstration</h2>
-
-  <p>
-    Voici, côte à côte, ce qu'on voit sur Ideas.xyz aujourd'hui (gauche) et ce qu'on verrait avec un ajustement minimal (droite). Le texte est identique&nbsp;; seuls le <code>font-size</code>, le <code>line-height</code> et la largeur changent.
-  </p>
-
-  <div class="compare">
-    <div class="compare__card">
-      <span class="badge badge--bad">Avant</span>
-      <h4>14 px / 1.4 / 100&nbsp;%</h4>
-      <p class="compare__bad">
-        Une plateforme d'intelligence en temps réel sur les 50 minerais critiques&nbsp;: lithium, cobalt, cuivre, nickel, terres rares, uranium, graphite, gallium. Carte monde immersive, feed d'alertes géopolitiques, catalyseurs juniors miniers, squeeze detector et alertes custom. Le Bloomberg accessible des matières premières stratégiques pour les retail traders avancés et les family offices, à 999&nbsp;$ par an au lieu de 24&nbsp;000&nbsp;$.
+      <p class="lead">
+        La plupart des sites de contenu négligent un détail invisible mais
+        décisif&nbsp;: le rythme typographique. Trop d'espace, pas assez, des
+        titres mous, des paragraphes tassés, et le lecteur abandonne sans savoir
+        pourquoi. Ce document applique, ligne par ligne, ce qu'on devrait faire.
       </p>
-    </div>
-    <div class="compare__card">
-      <span class="badge badge--good">Après</span>
-      <h4>17 px / 1.6 / 60ch</h4>
-      <p class="compare__good">
-        Une plateforme d'intelligence en temps réel sur les 50 minerais critiques&nbsp;: lithium, cobalt, cuivre, nickel, terres rares, uranium, graphite, gallium. Carte monde immersive, feed d'alertes géopolitiques, catalyseurs juniors miniers, squeeze detector et alertes custom. Le Bloomberg accessible des matières premières stratégiques pour les retail traders avancés et les family offices, à 999&nbsp;$ par an au lieu de 24&nbsp;000&nbsp;$.
+
+      <h2>
+        Pourquoi 19&nbsp;/&nbsp;1.65&nbsp;/&nbsp;740px est le standard d'or
+      </h2>
+
+      <p>
+        Trois nombres suffisent à cadrer 80&nbsp;% du travail&nbsp;:
+        <strong
+          >19&nbsp;px de font-size, 1.65 de line-height, ~740&nbsp;px de largeur
+          max</strong
+        >. C'est ce que pratiquent Substack, le blog de Stripe, celui de Linear,
+        Stratechery et la quasi-totalité des produits dont la lecture est le
+        cœur. Pas une mode&nbsp;: la résultante de décennies de recherche en
+        lisibilité, depuis le Bringhurst jusqu'aux études d'eye-tracking
+        modernes.
       </p>
-    </div>
-  </div>
 
-  <p class="pull-quote">
-    « Si le lecteur remarque la typo, elle a échoué. Si il lit jusqu'au bout sans s'en rendre compte, elle a réussi. »
-  </p>
+      <p>
+        Sur mobile, on reste sur du
+        <strong
+          >16&nbsp;px / 1.6 / pleine largeur avec 20&nbsp;px de padding
+          latéral</strong
+        >. C'est le défaut système iOS, le seuil au-dessous duquel iOS déclenche
+        un zoom involontaire sur les <code>input</code>, et le confort suffisant
+        pour des cards ou des paragraphes courts. Inutile de pousser plus haut
+        sauf si l'app est 100&nbsp;% long-form.
+      </p>
 
-  <h2>Le système complet, en CSS</h2>
+      <h3>Le piège du line-height uniforme</h3>
 
-  <p>
-    Plutôt que des media queries en cascade, on utilise <code>clamp()</code> pour interpoler en continu entre mobile et desktop. Le code suivant suffit à cadrer un site de lecture entier&nbsp;:
-  </p>
+      <p>
+        L'erreur la plus répandue, visible sur la plupart des sites de listing
+        comme Ideas.xyz, c'est d'appliquer un
+        <code>line-height: 1.5</code> partout. Résultat&nbsp;: les titres
+        flottent (mou), les paragraphes étouffent (fatigant). La règle est
+        simple et inverse&nbsp;:
+      </p>
 
-<pre><code>:root {
+      <table class="spec-table">
+        <thead>
+          <tr>
+            <th>Font-size</th>
+            <th>Line-height idéal</th>
+            <th>Cas d'usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>13–14 px</td>
+            <td><code>1.5–1.55</code></td>
+            <td>Captions, meta</td>
+          </tr>
+          <tr>
+            <td>16–17 px</td>
+            <td><code>1.6</code></td>
+            <td>Body mobile</td>
+          </tr>
+          <tr>
+            <td>18–20 px</td>
+            <td><code>1.6–1.65</code></td>
+            <td>Body desktop</td>
+          </tr>
+          <tr>
+            <td>22–24 px</td>
+            <td><code>1.5–1.55</code></td>
+            <td>Lead paragraph</td>
+          </tr>
+          <tr>
+            <td>26–32 px</td>
+            <td><code>1.3–1.4</code></td>
+            <td>H3, H2 mobile</td>
+          </tr>
+          <tr>
+            <td>36–48 px</td>
+            <td><code>1.15–1.25</code></td>
+            <td>H2 desktop, H1 mobile</td>
+          </tr>
+          <tr>
+            <td>52 px et plus</td>
+            <td><code>1.05–1.15</code></td>
+            <td>H1 desktop, hero</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>L'avant / après en une démonstration</h2>
+
+      <p>
+        Voici, côte à côte, ce qu'on voit sur Ideas.xyz aujourd'hui (gauche) et
+        ce qu'on verrait avec un ajustement minimal (droite). Le texte est
+        identique&nbsp;; seuls le <code>font-size</code>, le
+        <code>line-height</code> et la largeur changent.
+      </p>
+
+      <div class="compare">
+        <div class="compare__card">
+          <span class="badge badge--bad">Avant</span>
+          <h4>14 px / 1.4 / 100&nbsp;%</h4>
+          <p class="compare__bad">
+            Une plateforme d'intelligence en temps réel sur les 50 minerais
+            critiques&nbsp;: lithium, cobalt, cuivre, nickel, terres rares,
+            uranium, graphite, gallium. Carte monde immersive, feed d'alertes
+            géopolitiques, catalyseurs juniors miniers, squeeze detector et
+            alertes custom. Le Bloomberg accessible des matières premières
+            stratégiques pour les retail traders avancés et les family offices,
+            à 999&nbsp;$ par an au lieu de 24&nbsp;000&nbsp;$.
+          </p>
+        </div>
+        <div class="compare__card">
+          <span class="badge badge--good">Après</span>
+          <h4>17 px / 1.6 / 60ch</h4>
+          <p class="compare__good">
+            Une plateforme d'intelligence en temps réel sur les 50 minerais
+            critiques&nbsp;: lithium, cobalt, cuivre, nickel, terres rares,
+            uranium, graphite, gallium. Carte monde immersive, feed d'alertes
+            géopolitiques, catalyseurs juniors miniers, squeeze detector et
+            alertes custom. Le Bloomberg accessible des matières premières
+            stratégiques pour les retail traders avancés et les family offices,
+            à 999&nbsp;$ par an au lieu de 24&nbsp;000&nbsp;$.
+          </p>
+        </div>
+      </div>
+
+      <p class="pull-quote">
+        « Si le lecteur remarque la typo, elle a échoué. Si il lit jusqu'au bout
+        sans s'en rendre compte, elle a réussi. »
+      </p>
+
+      <h2>Le système complet, en CSS</h2>
+
+      <p>
+        Plutôt que des media queries en cascade, on utilise
+        <code>clamp()</code> pour interpoler en continu entre mobile et desktop.
+        Le code suivant suffit à cadrer un site de lecture entier&nbsp;:
+      </p>
+
+      <pre><code>:root {
   --fs-body: clamp(1.0625rem, 0.95rem + 0.36vw, 1.1875rem); /* 17 → 19 */
   --fs-h1:   clamp(2rem,      1.4rem + 3vw,    3.5rem);  /* 32 → 56 */
   --fs-h2:   clamp(1.625rem,  1.3rem + 1.6vw,  2.25rem); /* 26 → 36 */
@@ -720,108 +941,234 @@ article h1 {
   text-wrap: balance;
 }</code></pre>
 
-  <h3>Les détails qui font 80&nbsp;% du résultat</h3>
+      <h3>Les détails qui font 80&nbsp;% du résultat</h3>
 
-  <ul>
-    <li><strong><code>text-wrap: balance</code></strong> sur les titres pour éviter l'orpheline en bout de ligne.</li>
-    <li><strong><code>text-wrap: pretty</code></strong> sur les paragraphes pour équilibrer les deux dernières lignes.</li>
-    <li><strong>Letter-spacing négatif</strong> (<code>-0.018em</code> à <code>-0.028em</code>) sur les gros titres&nbsp;: les polices sans-serif s'étirent au-dessus de 32&nbsp;px et perdent en densité visuelle.</li>
-    <li><strong>Pas de noir pur</strong> sur fond blanc pur. <code>#1a1a1a</code> sur <code>#fafaf7</code> réduit la fatigue oculaire de 20&nbsp;%.</li>
-    <li><strong>Ponctuation suspendue</strong> avec <code>hanging-punctuation: first last</code> (Safari only pour l'instant, mais gracefully ignored ailleurs).</li>
-    <li><strong>Marges entre paragraphes</strong>&nbsp;: <code>1.4em</code> minimum, jamais le <code>1em</code> par défaut. C'est la respiration qui rend la lecture agréable.</li>
-  </ul>
+      <ul>
+        <li>
+          <strong><code>text-wrap: balance</code></strong> sur les titres pour
+          éviter l'orpheline en bout de ligne.
+        </li>
+        <li>
+          <strong><code>text-wrap: pretty</code></strong> sur les paragraphes
+          pour équilibrer les deux dernières lignes.
+        </li>
+        <li>
+          <strong>Letter-spacing négatif</strong> (<code>-0.018em</code> à
+          <code>-0.028em</code>) sur les gros titres&nbsp;: les polices
+          sans-serif s'étirent au-dessus de 32&nbsp;px et perdent en densité
+          visuelle.
+        </li>
+        <li>
+          <strong>Pas de noir pur</strong> sur fond blanc pur.
+          <code>#1a1a1a</code> sur <code>#fafaf7</code> réduit la fatigue
+          oculaire de 20&nbsp;%.
+        </li>
+        <li>
+          <strong>Ponctuation suspendue</strong> avec
+          <code>hanging-punctuation: first last</code> (Safari only pour
+          l'instant, mais gracefully ignored ailleurs).
+        </li>
+        <li>
+          <strong>Marges entre paragraphes</strong>&nbsp;:
+          <code>1.4em</code> minimum, jamais le <code>1em</code> par défaut.
+          C'est la respiration qui rend la lecture agréable.
+        </li>
+      </ul>
 
-  <h2>Comparatif des références du marché</h2>
+      <h2>Comparatif des références du marché</h2>
 
-  <p>
-    Voici les valeurs réelles relevées sur les apps de lecture qui font autorité. Toutes convergent vers la même fourchette&nbsp;:
-  </p>
+      <p>
+        Voici les valeurs réelles relevées sur les apps de lecture qui font
+        autorité. Toutes convergent vers la même fourchette&nbsp;:
+      </p>
 
-  <table class="spec-table">
-    <thead>
-      <tr><th>App</th><th>Body size</th><th>Line-height</th><th>Police</th><th>Largeur</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Medium</td><td>21 px</td><td>1.58</td><td>Charter</td><td>~680 px</td></tr>
-      <tr><td>Substack</td><td>19 px</td><td>1.6</td><td>Source Serif</td><td>~720 px</td></tr>
-      <tr><td>NYT</td><td>18–20 px</td><td>1.5</td><td>Imperial</td><td>~600 px</td></tr>
-      <tr><td>Stratechery</td><td>17 px</td><td>1.5</td><td>Georgia</td><td>~640 px</td></tr>
-      <tr><td>Linear blog</td><td>17 px</td><td>1.6</td><td>Inter</td><td>~640 px</td></tr>
-      <tr><td>Stripe blog</td><td>18 px</td><td>1.65</td><td>Sohne</td><td>~620 px</td></tr>
-    </tbody>
-  </table>
+      <table class="spec-table">
+        <thead>
+          <tr>
+            <th>App</th>
+            <th>Body size</th>
+            <th>Line-height</th>
+            <th>Police</th>
+            <th>Largeur</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Medium</td>
+            <td>21 px</td>
+            <td>1.58</td>
+            <td>Charter</td>
+            <td>~680 px</td>
+          </tr>
+          <tr>
+            <td>Substack</td>
+            <td>19 px</td>
+            <td>1.6</td>
+            <td>Source Serif</td>
+            <td>~720 px</td>
+          </tr>
+          <tr>
+            <td>NYT</td>
+            <td>18–20 px</td>
+            <td>1.5</td>
+            <td>Imperial</td>
+            <td>~600 px</td>
+          </tr>
+          <tr>
+            <td>Stratechery</td>
+            <td>17 px</td>
+            <td>1.5</td>
+            <td>Georgia</td>
+            <td>~640 px</td>
+          </tr>
+          <tr>
+            <td>Linear blog</td>
+            <td>17 px</td>
+            <td>1.6</td>
+            <td>Inter</td>
+            <td>~640 px</td>
+          </tr>
+          <tr>
+            <td>Stripe blog</td>
+            <td>18 px</td>
+            <td>1.65</td>
+            <td>Sohne</td>
+            <td>~620 px</td>
+          </tr>
+        </tbody>
+      </table>
 
-  <blockquote>
-    Ce n'est pas une question de goût. C'est une question de physique de l'œil et de cognition. La typo confortable n'est pas plus belle, elle est juste moins coûteuse à lire.
-    <cite>Robert Bringhurst, The Elements of Typographic Style</cite>
-  </blockquote>
+      <blockquote>
+        Ce n'est pas une question de goût. C'est une question de physique de
+        l'œil et de cognition. La typo confortable n'est pas plus belle, elle
+        est juste moins coûteuse à lire.
+        <cite>Robert Bringhurst, The Elements of Typographic Style</cite>
+      </blockquote>
 
-  <h2>Et pour Ideas.xyz spécifiquement&nbsp;?</h2>
+      <h2>Et pour Ideas.xyz spécifiquement&nbsp;?</h2>
 
-  <p>
-    Le problème n'est pas le contenu, il est excellent. Le problème, c'est que chaque carte d'idée business est rendue en <em>~14&nbsp;px / 1.4</em>, ce qui force le lecteur à plisser les yeux et à lire ligne après ligne sans rythme. Cinq changements suffisent&nbsp;:
-  </p>
+      <p>
+        Le problème n'est pas le contenu, il est excellent. Le problème, c'est
+        que chaque carte d'idée business est rendue en
+        <em>~14&nbsp;px / 1.4</em>, ce qui force le lecteur à plisser les yeux
+        et à lire ligne après ligne sans rythme. Cinq changements
+        suffisent&nbsp;:
+      </p>
 
-  <ol>
-    <li>Passer le body des cartes à <strong>17&nbsp;px / 1.6</strong> (mobile) et <strong>19&nbsp;px / 1.65</strong> (desktop).</li>
-    <li>Limiter la largeur des cartes à <strong>60–65ch</strong> (~580–620&nbsp;px), pas plus.</li>
-    <li>Augmenter l'espace inter-carte à <strong>2rem minimum</strong>.</li>
-    <li>Renforcer la hiérarchie&nbsp;: titre de carte en <strong>22&nbsp;px / 1.25 / 700</strong>, pas en 16&nbsp;px / 600.</li>
-    <li>Retirer le noir pur du body au profit d'un <strong>#1f2937</strong> doux.</li>
-  </ol>
+      <ol>
+        <li>
+          Passer le body des cartes à <strong>17&nbsp;px / 1.6</strong> (mobile)
+          et <strong>19&nbsp;px / 1.65</strong> (desktop).
+        </li>
+        <li>
+          Limiter la largeur des cartes à
+          <strong>60–65ch</strong> (~580–620&nbsp;px), pas plus.
+        </li>
+        <li>Augmenter l'espace inter-carte à <strong>2rem minimum</strong>.</li>
+        <li>
+          Renforcer la hiérarchie&nbsp;: titre de carte en
+          <strong>22&nbsp;px / 1.25 / 700</strong>, pas en 16&nbsp;px / 600.
+        </li>
+        <li>
+          Retirer le noir pur du body au profit d'un
+          <strong>#1f2937</strong> doux.
+        </li>
+      </ol>
 
-  <hr />
+      <hr />
 
-  <h3>TL;DR à coller dans le brief</h3>
+      <h3>TL;DR à coller dans le brief</h3>
 
-  <p>
-    <strong>19 / 1.65 / 740px</strong> sur desktop. <strong>17 / 1.6 / pleine largeur avec 20&nbsp;px de padding</strong> sur mobile. <code>clamp()</code> pour interpoler entre les deux. <code>text-wrap: balance</code> sur les titres, <code>pretty</code> sur les paragraphes. Pas de noir pur. Une seule famille pour les titres, une autre pour le body, et c'est tout. Le reste, c'est de la cosmétique.
-  </p>
+      <p>
+        <strong>19 / 1.65 / 740px</strong> sur desktop.
+        <strong>17 / 1.6 / pleine largeur avec 20&nbsp;px de padding</strong>
+        sur mobile. <code>clamp()</code> pour interpoler entre les deux.
+        <code>text-wrap: balance</code> sur les titres, <code>pretty</code> sur
+        les paragraphes. Pas de noir pur. Une seule famille pour les titres, une
+        autre pour le body, et c'est tout. Le reste, c'est de la cosmétique.
+      </p>
+    </article>
 
-</article>
-
-<!-- ============================================================
+    <!-- ============================================================
      FOOTER
 ============================================================ -->
-<footer class="site-footer">
-  <p>By Julien Levallois · Ideas · Mai 2026</p>
-  <p>Bascule light / dark dans la barre supérieure pour comparer.</p>
-</footer>
+    <footer class="site-footer">
+      <p>By Julien Levallois · Ideas · Mai 2026</p>
+    </footer>
 
-<script>
-  // ============================================================
-  //  Toggle theme : robuste pour les WebViews (Telegram, etc.)
-  //  - Init data-theme explicitement à 'light' ou 'dark' (jamais null)
-  //  - Délégué via 'pointerup' + 'click' pour survivre aux quirks tactiles
-  // ============================================================
-  (function () {
-    var root = document.documentElement;
-    var btn = document.getElementById('btn-theme');
-    if (!btn) return;
+    <script>
+      // ============================================================
+      //  Toggle theme : robuste pour les WebViews (Telegram, etc.)
+      //  - Init data-theme explicitement à 'light' ou 'dark' (jamais null)
+      //  - Délégué via 'pointerup' + 'click' pour survivre aux quirks tactiles
+      // ============================================================
+      (function () {
+        var root = document.documentElement;
+        var btn = document.getElementById("btn-theme");
+        if (!btn) return;
 
-    function apply(theme) {
-      root.setAttribute('data-theme', theme);
-      btn.textContent = theme === 'dark' ? 'Mode clair' : 'Mode sombre';
-      btn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
-    }
+        function apply(theme) {
+          root.setAttribute("data-theme", theme);
+          btn.textContent = theme === "dark" ? "Mode clair" : "Mode sombre";
+          btn.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+        }
 
-    var prefersDark = false;
-    try {
-      prefersDark = window.matchMedia &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches;
-    } catch (e) { /* WebView restreinte, on retombe en light */ }
+        var prefersDark = false;
+        try {
+          prefersDark =
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches;
+        } catch (e) {
+          /* WebView restreinte, on retombe en light */
+        }
 
-    apply(prefersDark ? 'dark' : 'light');
+        apply(prefersDark ? "dark" : "light");
 
-    function toggle(e) {
-      if (e) { e.preventDefault(); e.stopPropagation(); }
-      var current = root.getAttribute('data-theme');
-      apply(current === 'dark' ? 'light' : 'dark');
-    }
+        function toggle(e) {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+          var current = root.getAttribute("data-theme");
+          apply(current === "dark" ? "light" : "dark");
+        }
 
-    btn.addEventListener('click', toggle);
-  })();
-</script>
+        btn.addEventListener("click", toggle);
+      })();
 
-</body>
+      // ============================================================
+      //  Barre de progression du scroll, throttlée via rAF
+      //  Met à jour la largeur de .scroll-progress en pourcentage
+      //  selon la position de scroll dans le document.
+      // ============================================================
+      (function () {
+        var bar = document.getElementById("scroll-progress");
+        if (!bar) return;
+        var ticking = false;
+
+        function update() {
+          var doc = document.documentElement;
+          var max = doc.scrollHeight - doc.clientHeight;
+          var pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+          if (pct < 0) pct = 0;
+          if (pct > 100) pct = 100;
+          bar.style.width = pct + "%";
+          ticking = false;
+        }
+
+        window.addEventListener(
+          "scroll",
+          function () {
+            if (!ticking) {
+              window.requestAnimationFrame(update);
+              ticking = true;
+            }
+          },
+          { passive: true }
+        );
+        window.addEventListener("resize", update, { passive: true });
+        update();
+      })();
+    </script>
+  </body>
 </html>
